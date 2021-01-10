@@ -35,7 +35,7 @@ var t2 = performance.now();
 console.log(`Time Elapsed: ${(t2-t1) / 1000} seconds.`)
 
 
-//add2_Timing
+//add2_Timing (much faster than add1)
 
 function addUpTo(n) {
     return n * (n+1) / 2;
