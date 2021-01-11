@@ -1,4 +1,4 @@
-//add1
+//add1 - big O: O(n) --> the bigger n is, the more times we need to lop through something, so it takes longer the bigger n is
 
 function addUpTo(n) {
     let total = 0;
@@ -11,7 +11,7 @@ function addUpTo(n) {
 console.log(addUpTo(6))
 
 
-//add2
+//add2 - big O: O(1) --> no matter what n is, there are the same amount of operations - it doesn't take mroe time when n increases
 
 function addUpTo(n) {
     return n * (n+1) / 2;
