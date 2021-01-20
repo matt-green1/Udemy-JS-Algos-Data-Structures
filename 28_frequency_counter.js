@@ -34,8 +34,32 @@ function validAnagram(){
         return false
     }
     
+    // first we set up the two freqCounter Objects
+    let freqCounter1 = {}
+    let freqCounter2 = {}
     
+    //Next we build them (count the number of times a character shows up in each string - 1 if it doesn't exist, +1 if it already exists)
+    for(let char of str1) {
+        freqCounter1[char] ? freqCounter1[char] += 1 : freqCounter1[char] = 1
+    }
     
-  }
+    for(let char of str2) {
+        freqCounter2[char] ? freqCounter2[char] += 1 : freqCounter2[char] = 1
+    }
+    
 
+
+    for(let key in freqCounter1) {
+        // test if the chraracter in first string even exists in second string - if not, return false
+        if (!(key in freqCounter2)) {
+            return false
+        }
+
+        // check if frequency of char is same in both strings 
+        if (freqCounter1[key] !== freqCounter2[key]){
+            return false
+        }
+    }
+    
+    return true
   }
