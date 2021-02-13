@@ -35,6 +35,7 @@ class DoublyLinkedList {
         } else {
             this.tail = poppedNode.prev;
             this.tail.next = null;
+            // the reason we do the next line is to make sure there isn't a flaiting node out there that sitll points to it's formerly pervious node
             poppedNode.prev = null;
         }
         this.length--;
@@ -97,6 +98,9 @@ class DoublyLinkedList {
     }
     insert(index, val){
         if(index < 0 || index > this.length) return false;
+        
+        //the double bangs on the next two lines coerce the truthy return values
+        // to booleans
         if(index === 0) return !!this.unshift(val);
         if(index === this.length) return !!this.push(val);
 
@@ -108,6 +112,33 @@ class DoublyLinkedList {
         newNode.next = afterNode, afterNode.prev = newNode;
         this.length++;
         return true;
+    }
+
+    remove(index) {
+        //it's greater than or equal to on next line because we can't remove
+        // at index 8 for ex if there are 8 items - since highest index will be 7
+        if (index < 0 || index >= this.length) {
+            return undefined
+        }
+        
+        //why do we have to return this.shift as opposed to just calling this.shift?
+        if (index === 0) {
+            return this.shift()
+        }
+        if (index === this.length -1) {
+            return this.pop()
+        }
+        var nodeToRemove = this.get(index)
+        var prevNode = nodeToRemove.prev
+        var nextNode =  nodeToRemove.next
+        prevNode.next = nextNode
+        nextNode.prev = prevNode
+
+        nodeToRemove.next = null
+        nodeToRemove.prev = null
+
+        this.length--
+        return nodeToRemove
     }
 }
 
