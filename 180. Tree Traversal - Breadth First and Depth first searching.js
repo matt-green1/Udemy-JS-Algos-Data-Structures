@@ -88,12 +88,17 @@ class BinarySearchTree {
         return data;
     }
     
-    //WED - start by walking through this in your head
     DFSPreOrder(){
+        //this is just our final return order
         var data = [];
+        //below is the recursive helper function
         function traverse(node){
+            //push our root node value onto data list
             data.push(node.value);
+            //progress down left side of branches until there are no left branches left
             if(node.left) traverse(node.left);
+            
+            //when done with left of a branch we do the right side
             if(node.right) traverse(node.right);
         }
         traverse(this.root);
@@ -102,7 +107,11 @@ class BinarySearchTree {
     DFSPostOrder(){
         var data = [];
         function traverse(node){
+            //FIRST we explore the left side
+            // When we get to the bottom left we add node value
             if(node.left) traverse(node.left);
+
+            //then we go all the way to bottom right and add node value
             if(node.right) traverse(node.right);
             data.push(node.value);
         }
