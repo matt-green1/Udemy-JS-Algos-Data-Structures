@@ -39,6 +39,7 @@ class MaxBinaryHeap {
             
             //we set the indx up top to the formely parent index (completing the bubble up)
             idx = parentIdx;
+            //testing testing 123
         }
     }
 }
