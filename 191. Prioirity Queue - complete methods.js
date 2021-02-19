@@ -2,6 +2,8 @@ class PriorityQueue {
     constructor(){
         this.values = [];
     }
+    
+    //replaces insert - added priority and we deal with nodes now not just elements on a list
     enqueue(val, priority){
         let newNode = new Node(val, priority);
         this.values.push(newNode);
@@ -19,6 +21,7 @@ class PriorityQueue {
             idx = parentIdx;
         }
     }
+    //replaces extract or remove
     dequeue(){
         const min = this.values[0];
         const end = this.values.pop();
@@ -61,6 +64,7 @@ class PriorityQueue {
     }
 }
 
+// this is added to a normal binary heap
 class Node {
     constructor(val, priority){
         this.val = val;
