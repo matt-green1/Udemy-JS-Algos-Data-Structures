@@ -1,3 +1,5 @@
+// Note this is a bad example -- we'll make it better later
+
 function hash(key, arrayLen) {
     let total = 0;
     for (let char of key) {
