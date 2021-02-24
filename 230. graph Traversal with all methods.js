@@ -26,57 +26,103 @@ class Graph{
     }
     depthFirstRecursive(start){
         const result = [];
+        //keeps track of which vertices have been visited with a true/false valye
         const visited = {};
+        
+        //IMPORTANT - we define the adjacncy list here because
+        //if we used "this.adjacencylist" inside recursive function the
+        //context of the this keyword would change!!!! so we defin it here and then just refer to this variable
         const adjacencyList = this.adjacencyList;
 
+        //outer recursive function - vertex is "start" above - function called right after it's called with start
         (function dfs(vertex){
+            //if there's no vertex break out of recursive function
             if(!vertex) return null;
+            // sets a new key in visited and sets to true
             visited[vertex] = true;
+            // adds the start vertex to results array
             result.push(vertex);
+            //for each vertext in the adjacncy list...
             adjacencyList[vertex].forEach(neighbor => {
+                //if not true in visited object... (this stops us from counting an already counted neighbor)
                 if(!visited[neighbor]){
+                    //... then call the recursive helper function again on the next neighbor
                     return dfs(neighbor)
                 }
             });
+            //
         })(start);
 
+        // returns the results at the end
         return result;
     }
     depthFirstIterative(start){
+        //using an array as as stack (last in, first out)
         const stack = [start];
+        
+        //Create the same cariables that we do in recursive solution to keep track of stuff
         const result = [];
         const visited = {};
+        
+        //will eventually be set over and over to the popped off last value on our stack
         let currentVertex;
 
+        //coudl alternatively be an array but this is "more explicit"
         visited[start] = true;
+        
+        //while stack is not empty...
         while(stack.length){
+            
+            //pop off last value (most recently added...)
             currentVertex = stack.pop();
+            
+            //push in popped off value ro results array
             result.push(currentVertex);
 
+            // go through all neighbors of current vertex
             this.adjacencyList[currentVertex].forEach(neighbor => {
-               if(!visited[neighbor]){
-                   visited[neighbor] = true;
-                   stack.push(neighbor)
+               
+                //if its NEIGHBOR is not in visited object or is false...
+                if(!visited[neighbor]){
+                   //add it to the visited opject and set value to true
+                    visited[neighbor] = true;
+                   
+                    //add its neigbor to the stack
+                    stack.push(neighbor)
                } 
             });
         }
         return result;
     }
+
+
     breadthFirst(start){
+        //simple que - array shifting off front
         const queue = [start];
+        
+        //create our result and visited + currentVertex variables to store stuff like in DFS
         const result = [];
         const visited = {};
         let currentVertex;
+        
+        //hit the start vertex first
         visited[start] = true;
 
+        //while the queue isn't empty
         while(queue.length){
+            
+            //remove first item in queue and...
             currentVertex = queue.shift();
+            //push it onto result array
             result.push(currentVertex);
            
-
+            //go through each neighbor of start/current vertex
             this.adjacencyList[currentVertex].forEach(neighbor => {
+                //if it's not true in the visited object...
                 if(!visited[neighbor]){
+                    //add to visited object
                     visited[neighbor] = true;
+                    //and push the ngihbor's neighbor onto the queue
                     queue.push(neighbor);
                 }
             });
