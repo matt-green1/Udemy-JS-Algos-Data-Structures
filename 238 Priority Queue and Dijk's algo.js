@@ -4,8 +4,11 @@ class PriorityQueue {
     }
     enqueue(val, priority) {
       this.values.push({val, priority});
+      //every time we insert we re-sort
       this.sort();
     };
+    
+    //remove from front (which is sorted low to high) so we'll remove the lowest priority always
     dequeue() {
       return this.values.shift();
     };
@@ -27,7 +30,11 @@ class PriorityQueue {
       }
       Dijkstra(start, finish){
           const nodes = new PriorityQueue();
+          
+          //stores total distance to each node from start point
           const distances = {};
+          
+          //stores the reference to node before it (quickest way through "X node")
           const previous = {};
           let path = [] //to return at end
           let smallest;
